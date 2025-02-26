@@ -16,14 +16,14 @@ public class BoardService {
         boardRepository.save(dto.toEntity());
     }
 
-    public List<BoardDto.BoardResponse> list() {
+    public List<BoardDto.BoardListResponse> list() {
         List<Board> result = boardRepository.findAll();
 
-        return result.stream().map(BoardDto.BoardResponse::from).toList();
+        return result.stream().map(BoardDto.BoardListResponse::from).toList();
     }
 
-    public BoardDto.BoardResponse read(Long boardIdx) {
+    public BoardDto.BoardReadResponse read(Long boardIdx) {
         Board board = boardRepository.findById(boardIdx).orElseThrow();
-        return BoardDto.BoardResponse.from(board);
+        return BoardDto.BoardReadResponse.from(board);
     }
 }

@@ -19,15 +19,15 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<BoardDto.BoardResponse>> list() {
-        List<BoardDto.BoardResponse> response = boardService.list();
+    public ResponseEntity<List<BoardDto.BoardListResponse>> list() {
+        List<BoardDto.BoardListResponse> response = boardService.list();
 
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/read/{boardIdx}")
-    public ResponseEntity<BoardDto.BoardResponse> read(@PathVariable Long boardIdx) {
-        BoardDto.BoardResponse response = boardService.read(boardIdx);
+    public ResponseEntity<BoardDto.BoardReadResponse> read(@PathVariable Long boardIdx) {
+        BoardDto.BoardReadResponse response = boardService.read(boardIdx);
 
         return ResponseEntity.ok(response);
     }
