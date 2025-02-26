@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,20 +52,47 @@ public class BoardDto {
     @Getter @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class BoardListResponse {
+    public static class BoardResponse {
         private Long idx;
         private String title;
         private String content;
         private String writer;
         private int commentsCount;
 
-        public static BoardListResponse from(Board board) {
-            return BoardListResponse.builder()
+        public static BoardResponse from(Board board) {
+            return BoardResponse.builder()
                     .idx(board.getIdx())
                     .title(board.getTitle())
                     .content(board.getContent())
                     .writer(board.getWriter())
                     .commentsCount(board.getCommentsCount())
+                    .build();
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class BoardPageResponse {
+        private int page;
+        private int size;
+        private long totalElements;
+        private int totalPages;
+        private boolean hasNext;
+        private boolean hasPrevious;
+
+        private List<BoardResponse> boardList;
+
+        public static BoardPageResponse from(Page<Board> boardPage) {
+            return BoardPageResponse.builder()
+                    .page(boardPage.getNumber())
+                    .size(boardPage.getSize())
+                    .totalElements(boardPage.getTotalElements())
+                    .totalPages(boardPage.getTotalPages())
+                    .hasNext(boardPage.hasNext())
+                    .hasPrevious(boardPage.hasPrevious())
+                    .boardList(boardPage.stream().map(BoardResponse::from).collect(Collectors.toList()))
                     .build();
         }
     }
