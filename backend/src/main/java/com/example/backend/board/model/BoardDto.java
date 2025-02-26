@@ -16,6 +16,7 @@ public class BoardDto {
             return Board.builder()
                     .title(title)
                     .content(content)
+                    .writer(writer)
                     .build();
         }
     }
@@ -34,6 +35,7 @@ public class BoardDto {
                     .idx(board.getIdx())
                     .title(board.getTitle())
                     .content(board.getContent())
+                    .writer(board.getWriter())
                     .build();
         }
     }

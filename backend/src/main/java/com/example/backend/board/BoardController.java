@@ -9,7 +9,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/board")
 public class BoardController {
     private final BoardService boardService;
 
@@ -25,7 +25,7 @@ public class BoardController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{boardIdx}")
+    @GetMapping("/read/{boardIdx}")
     public ResponseEntity<BoardDto.BoardResponse> read(@PathVariable Long boardIdx) {
         BoardDto.BoardResponse response = boardService.read(boardIdx);
 
