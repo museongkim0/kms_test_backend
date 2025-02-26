@@ -19,6 +19,8 @@ public class CommentService {
         Optional<Board> result = boardRepository.findById(boardIdx);
         if (result.isPresent()) {
            Board board = result.get();
+           board.addCommentsCount();
+           boardRepository.save(board);
            commentRepository.save(dto.toEntity(board));
         }
     }

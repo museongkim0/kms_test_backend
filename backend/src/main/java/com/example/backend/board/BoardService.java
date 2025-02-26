@@ -3,6 +3,8 @@ package com.example.backend.board;
 import com.example.backend.board.model.Board;
 import com.example.backend.board.model.BoardDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +18,14 @@ public class BoardService {
         boardRepository.save(dto.toEntity());
     }
 
-    public List<BoardDto.BoardResponse> list() {
-        List<Board> result = boardRepository.findAll();
+    public BoardDto.BoardPageResponse list(int page, int size) {
+        Page<Board> result = boardRepository.findAll(PageRequest.of(page,size));
 
-        return result.stream().map(BoardDto.BoardResponse::from).toList();
+        return BoardDto.BoardPageResponse.from(result);
     }
 
-    public BoardDto.BoardResponse read(Long boardIdx) {
+    public BoardDto.BoardReadResponse read(Long boardIdx) {
         Board board = boardRepository.findById(boardIdx).orElseThrow();
-        return BoardDto.BoardResponse.from(board);
+        return BoardDto.BoardReadResponse.from(board);
     }
 }

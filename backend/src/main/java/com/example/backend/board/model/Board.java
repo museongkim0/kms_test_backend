@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,4 +26,10 @@ public class Board {
 
     @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
+
+    private int commentsCount;
+
+    public void addCommentsCount() {
+        this.commentsCount = this.commentsCount + 1;
+    }
 }
